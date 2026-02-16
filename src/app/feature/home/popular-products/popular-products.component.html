@@ -1,0 +1,10 @@
+<section class="py-16">
+  <div class="container xl:w-[95%]">
+    <h2 class="text-green-600 text-2xl font-medium pb-3">shop products</h2>
+    <div class="parent grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      @for (product of ProductList().slice(0, 10); track product.id) {
+    <app-card [cardProduct]="product"></app-card>
+      }
+    </div>
+  </div>
+</section>

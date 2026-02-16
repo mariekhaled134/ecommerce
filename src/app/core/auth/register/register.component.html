@@ -1,0 +1,108 @@
+<section class="border-gray-200 shadow-xs rounded bg-gray-200 md:w-1/2 mx-auto p-4 m-16">
+<div class="title">
+    <h2 class="mb-3 text-green-600 font-medium text-3xl text-center"> register now</h2>
+
+</div>
+<form [formGroup]="registerForm"(ngSubmit)="submitRegisterForm()">
+   
+  <div class="mb-3">
+        @let nameControl= registerForm.get('name');
+
+    <label for="name" class="main-label"> Name</label>
+    <input
+    formControlName="name" type="text" id="name" class=" main-input " />
+    @if(nameControl?.errors  && nameControl?.touched){
+    <div class="flex px-3 py-2 mt-0.5 text-base text-red-600 rounded-xs bg-red-100 "role="alert">
+        <span class="sr-only">Danger</span>
+        <ul class="list-disc list-inside">
+            @if(nameControl?.getError('required')){
+                 <li>name input is required</li>}
+       @else if (nameControl?.getError('minlength')) {      
+          <li>name input is should be more than or equal 3 characters</li>}
+@else if(nameControl?.getError('maxlength')){        
+       <li>name input is should be less than or equal 20 characters</li>}
+
+    </ul></div>}
+  </div>
+  <div class="mb-3">
+        @let emailControl=registerForm.get('email');
+
+    <label for="email" class="main-label"> Email</label>
+    <input  formControlName="email" type="email" id="email" class=" main-input " />
+@if(emailControl?.errors && emailControl?.touched){
+
+    <div class="flex px-3 py-2 mt-0.5 text-base text-red-600 rounded-xs bg-red-100 "role="alert">
+        <span class="sr-only">Danger</span>
+        <ul class="list-disc list-inside">
+            @if( emailControl?.getError('required')){
+        <li>enter email required</li>}
+        @else if ( emailControl?.getError('email')) { <li>enter valid email address</li>}
+       
+    </ul></div>}
+  </div>
+
+  <div class="mb-3">
+        @let passwrodControl= registerForm.get('password');
+
+    <label for="password" class="main-label"> password</label>
+    <input  formControlName="password" type="password" id="password" class=" main-input " />
+     @if(passwrodControl?.errors && passwrodControl?.touched){
+
+        <div class="flex px-3 py-2 mt-0.5 text-base text-red-600 rounded-xs bg-red-100 "role="alert">
+        <span class="sr-only">Danger</span>
+        <ul class="list-disc list-inside">
+                        @if( passwrodControl?.getError('required')){
+
+        <li> password input is required</li>}
+        @else if (passwrodControl?.getError('pattern')) {
+        <li>password should be minemum eight characters at least one upper case english latter,one lower english latter,one number and one special characters</li>
+        }</ul></div>}
+  </div>
+  <div class="mb-3">
+    <label for="rePassword" class="main-label"> Confirm password</label>
+    <input  formControlName="rePassword" type="password" id="rePassword" class=" main-input"/>
+ 
+@if (
+  registerForm.hasError('mismatch') &&
+  registerForm.get('rePassword')?.touched
+) {
+ 
+
+
+               <div class="flex px-3 py-2 mt-0.5 text-base text-red-600 rounded-xs bg-red-100 "role="alert">
+        <span class="sr-only">Danger</span>
+        <ul class="list-disc list-inside">
+         
+       <li>confirm password incorrect</li></ul></div>
+        }
+  </div>
+  <div class="mb-3">
+
+    <label for="phone" class="main-label"> Phone</label>
+    <input formControlName="phone" type="tel" id="phone" class=" main-input " />
+    @let phoneContorol=registerForm.get('phone');
+    @if(phoneContorol?.errors && phoneContorol?.touched){
+        <div class="flex px-3 py-2 mt-0.5 text-base text-red-600 rounded-xs bg-red-100 "role="alert">
+        <span class="sr-only">Danger</span>
+        <ul class="list-disc list-inside">
+            @if( phoneContorol?.getError('required')){        <li>phone input required</li>}
+@else if (phoneContorol?.getError('pattern')) {
+        <li>enter egyption phone number</li>}
+    </ul></div>}
+  </div>
+  <div class="flex flex-wrap justify-end">
+    <button type="submit" class=" btn-main px-3">Register
+        @if(isLoading()){
+        <span><i class="fas fa-spinner animate-spin"></i></span>}</button>
+   </div>
+   @if(errorMessage()){
+  <div class="flex px-3 py-2 mt-0.5 text-base items-center justify-center text-red-600 rounded-xs bg-red-100" role="alert">
+            <span class="sr-only">Danger</span>
+
+    <p>{{ errorMessage() }}</p>
+  </div>}
+
+   
+
+</form>
+</section>

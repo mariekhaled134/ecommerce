@@ -1,0 +1,129 @@
+<section class="min-h-screen bg-gray-50 py-8">
+  <div class="container mx-auto px-4">
+
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">My Orders</h1>
+      <p class="text-gray-600">View and track all your orders</p>
+    </div>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+      <div class="flex justify-center items-center py-20">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+      </div>
+    }
+
+    <!-- Error State -->
+    @if (errorMessage() && !isLoading()) {
+      <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+        <div class="flex items-center gap-2 text-red-800">
+          <span>{{ errorMessage() }}</span>
+        </div>
+      </div>
+    }
+
+    <!-- Empty State -->
+    @if (!isLoading() && orders().length === 0 && !errorMessage()) {
+      <div class="text-center py-20">
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">No Orders Yet</h3>
+        <p class="text-gray-600 mb-6">You haven't placed any orders yet.</p>
+        <a routerLink="/home"
+           class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700">
+          Continue Shopping
+        </a>
+      </div>
+    }
+
+    <!-- Orders List -->
+    @if (!isLoading() && orders().length > 0) {
+      <div class="space-y-6">
+
+        @for (order of orders(); track order._id) {
+          <div class="bg-white rounded-lg shadow-md border border-gray-200">
+
+            <!-- Order Header -->
+            <div class="bg-gray-50 px-6 py-4 border-b">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h3 class="text-sm font-semibold">
+                    Order #{{ order._id.slice(-8) }}
+                  </h3>
+                  <p class="text-sm text-gray-600">
+                    {{ formatDate(order.createdAt) }}
+                  </p>
+                </div>
+
+                <div class="flex gap-2">
+                  <span class="px-3 py-1 rounded-full text-sm"
+                        [class]="order.paymentMethodType === 'cash'
+                          ? 'bg-amber-100 text-amber-800'
+                          : 'bg-purple-100 text-purple-800'">
+                    {{ order.paymentMethodType === 'cash'
+                      ? 'Cash on Delivery'
+                      : 'Card Payment' }}
+                  </span>
+
+                  <span class="px-3 py-1 rounded-full text-sm"
+                        [ngClass]="getStatusBadgeClass(order.isPaid, order.isDelivered)">
+                    {{ getStatusText(order.isPaid, order.isDelivered) }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="px-6 py-4 space-y-4">
+              @for (item of order.cartItems; track $index) {
+                <div class="flex gap-4 border-b pb-4 last:border-0">
+
+                  <img
+                    [src]="item.product.imageCover"
+                    class="w-20 h-20 rounded object-cover"
+                  />
+
+                  <div class="flex-1">
+                    <h4 class="font-medium">{{ item.product.title }}</h4>
+
+                    <div class="text-sm text-gray-600 flex gap-3">
+                      @if (item.product.category) {
+                        <span>{{ item.product.category.name }}</span>
+                      }
+                      @if (item.product.brand) {
+                        <span>{{ item.product.brand.name }}</span>
+                      }
+                    </div>
+
+                    <div class="flex justify-between mt-2">
+                      <span>Qty: {{ item.count }}</span>
+                      <span class="font-semibold">
+                        £{{ item.price * item.count }}
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+              }
+            </div>
+
+            <!-- Shipping -->
+            <div class="px-6 py-4 bg-gray-50 border-t">
+              <p>{{ order.shippingAddress.details }}</p>
+              <p>{{ order.shippingAddress.city }}</p>
+              <p>{{ order.shippingAddress.phone }}</p>
+
+              <div class="text-right mt-4">
+                <p class="text-lg font-bold text-green-600">
+                  £{{ order.totalOrderPrice }}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        }
+
+      </div>
+    }
+
+  </div>
+</section>

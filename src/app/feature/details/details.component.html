@@ -1,0 +1,31 @@
+<section>
+  <div class="container xl:w-[95%]">
+    <div class="grid sm:grid-cols-12 items-center gap-4">
+      <div class="col-span-3">
+        <div>
+          <img
+            class="w-full"
+            [src]="productDetailsData().imageCover"
+            [alt]="productDetailsData().title"
+            [title]="productDetailsData().title"
+          />
+        </div>
+      </div>
+      <div class="col-span-9">
+        <div>
+          <h2 class="text-lg pb-2">{{ productDetailsData().category.name }}</h2>
+          <p class="text-sm text-gray">{{ productDetailsData().title }}</p>
+          <h3 class="text-sm text-green-600">{{ productDetailsData().category.name }}</h3>
+
+          <div class="flex flex-wrap items-center justify-between pb-2">
+            <span>{{ productDetailsData().price }}Egp</span>
+            <span
+              ><i class="fas fa-star text-yellow-500"></i
+              >{{ productDetailsData().ratingsAverage }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</section>

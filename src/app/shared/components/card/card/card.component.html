@@ -1,0 +1,27 @@
+    <div class="card flex flex-col h-full group/card">
+      <div  [routerLink]="['/details',cardProduct.slug ,cardProduct.id]" class="cursor-pointer">
+          <img [src]="cardProduct.imageCover"  class=" rounded-xs h-48 object-cover w-full" [alt]="cardProduct.title" [title]="cardProduct.title" />
+      <div class="flex flex-col flex-groW">
+  <h3 class="text-sm text-green-600">
+    {{ cardProduct.category.name }}
+  </h3>
+
+  <h4 class="text-lg">
+    {{ cardProduct.title| split :2 }}
+  </h4>
+
+  <div class="flex items-center justify-between mt-auto pb-2">
+    <span>{{ cardProduct.price |currency:'GBP'}}</span>
+    <span>
+      <i class="fas fa-star text-yellow-500"></i>
+      {{ cardProduct.ratingsAverage }}
+    </span>
+  </div>
+</div>
+</div>
+          <button (click)="addProductItemToCart(cardProduct.id)"
+            class="btn-main w-full translate-y-[120%] group-hover/card:translate-y-0 transition-[translate] duration-800"
+          >
+            add to cart
+          </button>
+        </div>

@@ -1,0 +1,32 @@
+<section class="py-16">
+  <div class="container xl:w-[95%]">
+
+    <h2 class="text-green-600 text-2xl font-medium pb-3">
+      shop categories
+    </h2>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+      @for (category of CategoriesList(); track category._id) {
+
+        <div class="card flex flex-col  items-center p-3 border rounded-md">
+
+          <img
+            class="w-full h-full object-cover"
+            [src]="category.image"
+            [alt]="category.name"
+            [title]="category.name"
+          />
+
+          <h3 class="mt-2 text-green-600 text-center text-lg">
+            {{ category.name }}
+          </h3>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+</section>

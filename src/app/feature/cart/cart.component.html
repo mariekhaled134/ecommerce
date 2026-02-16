@@ -1,0 +1,66 @@
+<section class="bg-gray-100 p-4">
+    <div class="container">
+        <div class="parent grid sm:grid-cols-12 gap-10">
+            <div class="col-span-8">
+<div class=" bg-gray-200 p-4 shadow rounded-lg">
+    <div class="flex flex-wrap gap-3 mb-3">
+        <h1 class="text-xl">cart</h1>
+        @if (cartDetailsData().products) {        <span class="text-xl">{{cartDetailsData().products.length}} items</span>
+}
+    </div>
+@for (item of cartDetailsData().products; track item.product._id) {
+   
+        <div class="parent grid gap-2 sm:grid-cols-12 bg-light p-4 shadow rounded-lg mb-3">
+        <div class="col-span-1">
+<div>
+    <img class="w-full" [src]="item.product.imageCover" [alt]="item.product.title">
+</div>
+        </div>
+        <div class="col-span-11">
+<div class="flex flex-wrap justify-between items-center">
+    <div>
+    <h3 class="pb-3 text-lg ">{{item.product.title}}</h3>
+ <div class="flex flex-wrap gap-3">
+       <div class="bg-gray-200 border rounded-md py-1 px-3 flex flex-wrap space-x-3">
+        <button (click)="updateProductCount(item.product._id ,item.count-1)" class="cursor-pointer">
+            <i class="fas fa-minus"></i>
+           
+        </button>
+        <span>{{item.count}}</span>
+  <button (click)="updateProductCount(item.product._id ,item.count+1)" class="cursor-pointer">
+            <i class="fas fa-plus"></i>
+           
+        </button>
+    </div>
+    <button (click)="removeProductItemFromCart( item.product._id)"  class="cursor-pointer">
+        <i class="fas fa-trash-can"></i>
+    </button>
+ </div>
+</div>
+<span>{{item.price * item.count |currency:'GBP'}} </span>
+        </div></div>
+    </div>
+}
+ @empty {
+    <h2 class=" items-center text-green-600 text-2xl">NO DATA FOUND</h2>
+ }
+</div>
+            </div>
+            <div class="col-span-4">
+                <div class="bg-gray-200 shadow rounded-lg p-4 border border-gray-200">
+
+                    <h2 class="text-2xl">order Summary</h2>
+                    <div class="flex flex-wrap justify-between items-center py-3">
+                       
+                        <span class="text-lg">price</span>
+                        <span class="text-lg">{{cartDetailsData().totalCartPrice |currency:'GBP' }}</span>
+
+                    </div>
+<button (click)="goToCheckout()" class="btn-main w-full">
+  Proceed to Checkout
+</button>                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

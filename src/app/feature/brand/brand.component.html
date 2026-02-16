@@ -1,0 +1,25 @@
+<section class="py-16">
+    <div class="container xl:w-[95%]">
+    <h2 class="text-green-600    text-2xl   font-medium pb-3">shop Brands</h2>
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 ">
+
+    @for (brand of brandsList(); track brand._id) {
+
+      <div
+        class="card flex flex-col items-center p-3 "
+   
+      >
+        <img
+          class="w-full object-contain"
+          [src]="brand.image"
+          [alt]="brand.name"
+          [title]="brand.name"       
+           />
+
+   
+      </div>
+
+    }
+</div>
+  </div>
+</section>
