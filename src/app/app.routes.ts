@@ -45,7 +45,7 @@ export const routes: Routes = [
       { path: 'details/:slug/:id', loadComponent: () => import('./feature/details/details.component').then(m => m.DetailsComponent), title: 'details' },
       { path: 'brand', loadComponent: () => import('./feature/brand/brand.component').then(m => m.BrandComponent), title: 'brand' },
       { path: 'product', loadComponent: () => import('./feature/products/products.component').then(m => m.ProductsComponent), title: 'product' },
-      { path: 'categories', loadComponent: () => import('./feature/categries/categries.component').then(m => m.CategriesComponent), title: 'categories' },
+      { path: 'caetgries', loadComponent: () => import('./feature/categries/categries.component').then(m => m.CategriesComponent), title: 'categories' },
       { path: 'reset-password', loadComponent: () => import('./core/auth/reset-password/reset-password/reset-password.component').then(m => m.ResetPasswordComponent), title: 'Reset Password' }
     ],
   },
