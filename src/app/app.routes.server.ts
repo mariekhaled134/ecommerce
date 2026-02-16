@@ -2,41 +2,16 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
 
-  // Static Pages
-  {
-    path: '',
-    renderMode: RenderMode.Prerender
-  },
-  {
-    path: 'home',
-    renderMode: RenderMode.Prerender
-  },
-  {
-    path: 'cart',
-    renderMode: RenderMode.Prerender
-  },
-  {
-    path: 'brand',
-    renderMode: RenderMode.Prerender
-  },
-  {
-    path: 'product',
-    renderMode: RenderMode.Prerender
-  },
+  { path: '', renderMode: RenderMode.Prerender },
+  { path: 'home', renderMode: RenderMode.Prerender },
+  { path: 'cart', renderMode: RenderMode.Prerender },
+  { path: 'brand', renderMode: RenderMode.Prerender },
+  { path: 'product', renderMode: RenderMode.Prerender },
+  { path: 'categories', renderMode: RenderMode.Prerender },
 
-  // Dynamic Pages
-  {
-    path: 'details/:slug/:id',
-    renderMode: RenderMode.Server
-  },
-  {
-    path: 'checkout/:id',
-    renderMode: RenderMode.Server
-  },
+  { path: 'checkout/:id', renderMode: RenderMode.Server },
+  { path: 'details/:slug/:id', renderMode: RenderMode.Server },
 
-  // fallback
-  {
-    path: '**',
-    renderMode: RenderMode.Server
-  }
+  // Fallback
+  { path: '**', renderMode: RenderMode.Server }
 ];
